@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://clv4jcafvruqn"]
+
+[ext_resource type="Script" uid="uid://6ueimrjs6pgq" path="res://scripts/player/basic_tool.gd" id="1_euk6u"]
+
+[sub_resource type="Gradient" id="Gradient_lvxji"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p47bc"]
+gradient = SubResource("Gradient_lvxji")
+
+[node name="BasicTool" type="Node2D" unique_id=618082837]
+script = ExtResource("1_euk6u")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=276224162]
+position = Vector2(13, 1)
+scale = Vector2(0.0625, 0.125)
+texture = SubResource("GradientTexture2D_p47bc")
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=411526990]
+position = Vector2(13, 5)

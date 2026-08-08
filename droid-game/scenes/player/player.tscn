@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://tnwjpgma4o5v"]
+
+[ext_resource type="Texture2D" uid="uid://b6msy0m1h11q2" path="res://assets/sprites/Droid_Sprite.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://b57e5c0adpt1y" path="res://scripts/player/movement.gd" id="1_onrkg"]
+[ext_resource type="Script" uid="uid://bmsvwdhw1ibyf" path="res://scripts/tool_manager.gd" id="3_75vfm"]
+[ext_resource type="Script" uid="uid://0fkh16agfleu" path="res://scripts/player/look.gd" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://waq13wr2bduh" path="res://scenes/player/camera_2d.tscn" id="4_lvxji"]
+[ext_resource type="PackedScene" uid="uid://clv4jcafvruqn" path="res://scenes/player/basic_tool.tscn" id="5_p47bc"]
+[ext_resource type="PackedScene" uid="uid://b8tfix72uwfv" path="res://scenes/player/welder_test.tscn" id="6_5gtgg"]
+[ext_resource type="PackedScene" uid="uid://3nuljhtt4liu" path="res://scenes/player/scanner.tscn" id="9_5gtgg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
+size = Vector2(29, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hqtel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dw050"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1420747781]
+y_sort_enabled = true
+
+[node name="Movement" type="Node2D" parent="." unique_id=1824442037]
+script = ExtResource("1_onrkg")
+
+[node name="Look" type="Node2D" parent="." unique_id=538821792]
+script = ExtResource("3_i3pqv")
+tool_speed = 4.0
+
+[node name="ToolManager" type="Node2D" parent="." unique_id=707114439]
+script = ExtResource("3_75vfm")
+slot_1 = ExtResource("5_p47bc")
+slot_2 = ExtResource("9_5gtgg")
+slot_3 = ExtResource("6_5gtgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=289417052]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_b26j0")
+
+[node name="Camera2D" parent="." unique_id=1531042009 node_paths=PackedStringArray("player") instance=ExtResource("4_lvxji")]
+zoom = Vector2(2, 2)
+player = NodePath("..")
+
+[node name="BodyPivot" type="Node2D" parent="." unique_id=1998197108]
+
+[node name="BodySprite" type="AnimatedSprite2D" parent="BodyPivot" unique_id=1748977882]
+unique_name_in_owner = true
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_hqtel")
+animation = &"Move"
+autoplay = "Idle"
+
+[node name="HeadPivot" type="Node2D" parent="." unique_id=1545579652]
+
+[node name="HeadSprite" type="AnimatedSprite2D" parent="HeadPivot" unique_id=1408739369]
+sprite_frames = SubResource("SpriteFrames_dw050")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.027535332
+
+[node name="ToolPivot" type="Node2D" parent="." unique_id=979092452]
+
+[node name="ToolMount" type="Node2D" parent="ToolPivot" unique_id=842938211]

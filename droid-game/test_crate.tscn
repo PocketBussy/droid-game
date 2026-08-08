@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b7adhmsyud04h"]
+
+[ext_resource type="Script" uid="uid://bgi4lm4m2xhhn" path="res://test_crate.gd" id="1_ymais"]
+
+[sub_resource type="Gradient" id="Gradient_7f65j"]
+colors = PackedColorArray(0, 0.53333336, 0, 1, 0.8336551, 0.4238812, 0.871372, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_204y4"]
+gradient = SubResource("Gradient_7f65j")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_etofk"]
+size = Vector2(63.999996, 63.999996)
+
+[node name="TestCrate" type="Area2D" unique_id=2042593718]
+script = ExtResource("1_ymais")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=412762711]
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.21875, 0.21875001)
+texture = SubResource("GradientTexture2D_204y4")
+
+[node name="ScanHighlight" type="Sprite2D" parent="." unique_id=1448674259]
+visible = false
+position = Vector2(-4.7683716e-07, 0)
+scale = Vector2(0.21875, 0.21875001)
+texture = SubResource("GradientTexture2D_204y4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2045782598]
+position = Vector2(0, 2.3841858e-07)
+scale = Vector2(0.21875, 0.21875001)
+shape = SubResource("RectangleShape2D_etofk")
