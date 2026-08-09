@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://ce8cnamld6iy7"]
+
+[ext_resource type="Script" uid="uid://cts4idnqp68eb" path="res://repair_welder.gd" id="1_y8uej"]
+[ext_resource type="Texture2D" uid="uid://cndgaq8vvj4k3" path="res://assets/sprites/Welder_Torch.png" id="2_ia6f5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_058ae"]
+atlas = ExtResource("2_ia6f5")
+region = Rect2(0, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivdvt"]
+atlas = ExtResource("2_ia6f5")
+region = Rect2(0, 42, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iudsi"]
+atlas = ExtResource("2_ia6f5")
+region = Rect2(42, 42, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6xpp"]
+atlas = ExtResource("2_ia6f5")
+region = Rect2(84, 42, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1f0y"]
+atlas = ExtResource("2_ia6f5")
+region = Rect2(126, 42, 42, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wp0re"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_058ae")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivdvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iudsi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6xpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1f0y")
+}],
+"loop": true,
+"name": &"Weld",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e8qeh"]
+radius = 6.0
+height = 20.0
+
+[node name="RepairWelder" type="Node2D" unique_id=1728958418]
+position = Vector2(3, 29)
+script = ExtResource("1_y8uej")
+metadata/_edit_horizontal_guides_ = [-42.0]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=706899938]
+sprite_frames = SubResource("SpriteFrames_wp0re")
+animation = &"Idle"
+
+[node name="RepairArea" type="Area2D" parent="." unique_id=1827511484]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepairArea" unique_id=138096991]
+visible = false
+position = Vector2(1, 30)
+shape = SubResource("CapsuleShape2D_e8qeh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1104624162]

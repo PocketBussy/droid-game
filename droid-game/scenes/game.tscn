@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bemfi74y2ogg6" path="res://assets/Tile pallet/Tile_Pallet-5.png" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://1brpkab1dir6" path="res://assets/Tile pallet/Tile_Pallet-4.png" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://b7adhmsyud04h" path="res://test_crate.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b8s1bn22a1apf" path="res://broken_terminal.tscn" id="7_u5sy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_e2o6t")
@@ -78,3 +79,6 @@ tile_set = SubResource("TileSet_feb5d")
 
 [node name="TestCrate" parent="." unique_id=2042593718 instance=ExtResource("6_p57ef")]
 position = Vector2(-281, -174)
+
+[node name="BrokenTerminal" parent="." unique_id=1967031574 instance=ExtResource("7_u5sy4")]
+position = Vector2(303, -84)

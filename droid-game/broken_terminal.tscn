@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b8s1bn22a1apf"]
+
+[ext_resource type="Script" uid="uid://boq3wybe27cgw" path="res://broken_terminal.gd" id="1_4jt3e"]
+
+[sub_resource type="Gradient" id="Gradient_87epi"]
+colors = PackedColorArray(0.65724576, 0.34108546, 0.32009113, 1, 0.59231764, 0.3519527, 0.6781737, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o6w5h"]
+gradient = SubResource("Gradient_87epi")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_181pw"]
+size = Vector2(32, 32)
+
+[node name="BrokenTerminal" type="Area2D" unique_id=1967031574]
+script = ExtResource("1_4jt3e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1971280002]
+position = Vector2(-5.9604645e-08, -4.172325e-07)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_o6w5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=104582812]
+shape = SubResource("RectangleShape2D_181pw")
