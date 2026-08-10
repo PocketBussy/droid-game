@@ -1,27 +1,34 @@
 extends Node2D
 
-@export var tool_name: String = "Repair Welder"
-@export var repair_amount: float = 25.0
-@export var cooldown: float = 0.5
+@export var repair_speed: float = 30.0
 
 @onready var repair_area: Area2D = $RepairArea
-#@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-var can_repair := true
+@onready var sparks: GPUParticles2D = $Sparks
 
 
-func use() -> void:
-	if not can_repair:
+var welding: bool = false
+
+
+func use_start() -> void:
+	welding = true
+	print("Welder started")
+
+func use_hold(delta: float) -> void:
+	if not welding:
 		return
 
-	can_repair = false
+	var repairing_target := false
 
-	#animation_player.play("repair")
-	$AnimatedSprite2D.play("Weld")
 	for area in repair_area.get_overlapping_areas():
 		if area.has_method("repair"):
-			area.repair(repair_amount)
+			area.repair(repair_speed * delta)
+			$AnimatedSprite2D.play("Weld")
+			repairing_target = true
 			break
+	sparks.emitting = repairing_target
 
-	await get_tree().create_timer(cooldown).timeout
-	can_repair = true
+func use_stop() -> void:
+	welding = false
+	print("Welder stopped")
+	$AnimatedSprite2D.play("Idle")
+	sparks.emitting = false

@@ -52,6 +52,14 @@ tile_size = Vector2i(32, 32)
 sources/3 = SubResource("TileSetAtlasSource_feb5d")
 sources/4 = SubResource("TileSetAtlasSource_ryrav")
 
+[sub_resource type="Gradient" id="Gradient_u5sy4"]
+colors = PackedColorArray(0.50534403, 0.5053441, 0.50534403, 1, 0.47397572, 0.47397572, 0.47397572, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gee14"]
+gradient = SubResource("Gradient_u5sy4")
+fill_from = Vector2(0, 0.02991453)
+fill_to = Vector2(1, 0.008547009)
+
 [node name="Game" type="Node2D" unique_id=1630779740]
 
 [node name="TileMap" type="Node2D" parent="." unique_id=935375469]
@@ -80,5 +88,15 @@ tile_set = SubResource("TileSet_feb5d")
 [node name="TestCrate" parent="." unique_id=2042593718 instance=ExtResource("6_p57ef")]
 position = Vector2(-281, -174)
 
-[node name="BrokenTerminal" parent="." unique_id=1967031574 instance=ExtResource("7_u5sy4")]
+[node name="BrokenTerminal" parent="." unique_id=1967031574 node_paths=PackedStringArray("powered_light") instance=ExtResource("7_u5sy4")]
 position = Vector2(303, -84)
+powered_light = NodePath("../PointLight2D")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1471255443]
+position = Vector2(166, -263)
+energy = 10.99
+blend_mode = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_gee14")
+texture_scale = 0.01

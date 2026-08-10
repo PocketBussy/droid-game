@@ -15,7 +15,7 @@ func _ready() -> void:
 	equip_slot(0)
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("tool_slot_1"):
 		equip_slot(0)
 
@@ -25,13 +25,28 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("tool_slot_3"):
 		equip_slot(2)
 
-	if Input.is_action_just_pressed("Use Tool"):
-		use_current_tool()
+
+	if Input.is_action_just_pressed("use_tool"):
+		if current_tool != null and current_tool.has_method("use_start"):
+			current_tool.use_start()
+		elif current_tool != null and current_tool.has_method("use"):
+			current_tool.use()
+
+
+	if Input.is_action_pressed("use_tool"):
+		if current_tool != null and current_tool.has_method("use_hold"):
+			current_tool.use_hold(delta)
+
+
+	if Input.is_action_just_released("use_tool"):
+		if current_tool != null and current_tool.has_method("use_stop"):
+			current_tool.use_stop()
 
 
 func equip_slot(slot: int) -> void:
 	if current_slot == slot:
 		return
+
 	var tool_scene: PackedScene
 
 	match slot:
@@ -54,8 +69,3 @@ func equip_slot(slot: int) -> void:
 	tool_mount.add_child(current_tool)
 
 	current_slot = slot
-
-
-func use_current_tool() -> void:
-	if current_tool != null and current_tool.has_method("use"):
-		current_tool.use()
