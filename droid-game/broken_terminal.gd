@@ -3,11 +3,13 @@ extends Area2D
 @export var max_integrity: float = 100.0
 @export var integrity: float = 25.0
 @export var powered_light: PointLight2D
+@export var powered_door: StaticBody2D
 
 @onready var repair_bar: ProgressBar = $RepairBar
 @onready var terminal_sprite: AnimatedSprite2D = $TerminalSprite
 @onready var broken_sprite: AnimatedSprite2D = $TerminalSprite/BrokenSprite
 @onready var repaired_sprite: AnimatedSprite2D = $TerminalSprite/RepairedSprite
+
 
 var repaired: bool = false
 
@@ -57,10 +59,7 @@ func fully_repaired() -> void:
 	if powered_light:
 		powered_light.enabled = true
 
-	print("Object fully repaired!")
+	if powered_door:
+		powered_door.power_on()
 
-	if powered_light:
-		powered_light.enabled = true
-		print("Light enabled: ", powered_light.enabled)
-	else:
-		print("No powered light assigned")
+	print("Object fully repaired!")
