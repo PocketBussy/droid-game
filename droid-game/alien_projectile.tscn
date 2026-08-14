@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cbkeef4nfi72a"]
+
+[ext_resource type="Script" uid="uid://dumugmcar0xvh" path="res://alien_projectile.gd" id="1_4nx3x"]
+[ext_resource type="Texture2D" uid="uid://cu7hh32maye6y" path="res://assets/sprites/Vomit_Attack_Sprite_Sheet.png" id="1_i3v3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nx3x"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(0, 0, 42, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_savgm"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(42, 0, 42, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvu5i"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(84, 0, 42, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pdx8"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(126, 0, 42, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn3pt"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(168, 0, 42, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7a7my"]
+atlas = ExtResource("1_i3v3n")
+region = Rect2(210, 0, 42, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m2okk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nx3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_savgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvu5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pdx8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn3pt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7a7my")
+}],
+"loop": false,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_savgm"]
+radius = 9.0
+
+[node name="AlienProjectile" type="Area2D" unique_id=1413744861]
+script = ExtResource("1_4nx3x")
+speed = 150.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=895796434]
+position = Vector2(0, -29)
+sprite_frames = SubResource("SpriteFrames_m2okk")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1160032279]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_savgm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

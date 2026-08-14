@@ -68,4 +68,10 @@ func equip_slot(slot: int) -> void:
 	current_tool = tool_scene.instantiate()
 	tool_mount.add_child(current_tool)
 
+	print("Equipped slot: ", slot)
+	print("Tool scene: ", current_tool.name)
+	print("Tool position: ", current_tool.position)
+
 	current_slot = slot
+	
+	
