@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://3nuljhtt4liu"]
+
+[ext_resource type="Script" uid="uid://ca3mt1xio7e6o" path="res://scripts/tools/scanner.gd" id="1_bj6ri"]
+[ext_resource type="Texture2D" uid="uid://dxim111e2b21n" path="res://assets/sprites/Scanner.png" id="2_ljb70"]
+[ext_resource type="Texture2D" uid="uid://byi5cpt3y8l6n" path="res://assets/sprites/Scanning.png" id="3_ljb70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em1be"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8laan"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uump"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxh71"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ld4cr"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf156"]
+atlas = ExtResource("3_ljb70")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i16ik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em1be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8laan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uump")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxh71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ld4cr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf156")
+}],
+"loop": false,
+"name": &"Scan",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_ljb70"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2),
+"points": PackedFloat32Array(0, -0.0005, 0, 0.0005, 0, 1, -0.20009151, -0.37517157, 0.53333336, 1, 0, -0.005555556, -1.8333334, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 1)
+}
+
+[sub_resource type="Animation" id="Animation_em1be"]
+resource_name = "scanfade"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 2),
+"points": PackedFloat32Array(0, -0.05555556, -0.007574453, 0.111111104, 0.015148903, 0, -1, 10.113925, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8laan"]
+_data = {
+&"RESET": SubResource("Animation_ljb70"),
+&"scanfade": SubResource("Animation_em1be")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oojv5"]
+radius = 2.2999997
+
+[node name="Scanner" type="Node2D" unique_id=1729525736]
+script = ExtResource("1_bj6ri")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1855828514]
+position = Vector2(-9, -8)
+texture = ExtResource("2_ljb70")
+
+[node name="ScanPulse" type="AnimatedSprite2D" parent="." unique_id=1251297342]
+modulate = Color(0.9995572, 2.5003004, 0.9995572, 0)
+position = Vector2(-9, -12)
+sprite_frames = SubResource("SpriteFrames_i16ik")
+animation = &"Scan"
+frame = 5
+frame_progress = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScanPulse" unique_id=1753910826]
+libraries/ = SubResource("AnimationLibrary_8laan")
+
+[node name="ScanArea" type="Area2D" parent="." unique_id=977785072]
+position = Vector2(-8, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScanArea" unique_id=698868954]
+position = Vector2(-0.99999994, 0)
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_oojv5")

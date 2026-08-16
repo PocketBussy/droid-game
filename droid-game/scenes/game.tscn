@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://dq4meh8syjio" path="res://assets/Tile pallet/Tile_Pallet-1.png" id="3_fc0e3"]
 [ext_resource type="Texture2D" uid="uid://bemfi74y2ogg6" path="res://assets/Tile pallet/Tile_Pallet-5.png" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://1brpkab1dir6" path="res://assets/Tile pallet/Tile_Pallet-4.png" id="5_7jktm"]
-[ext_resource type="PackedScene" uid="uid://b7adhmsyud04h" path="res://test_crate.tscn" id="6_p57ef"]
-[ext_resource type="PackedScene" uid="uid://b8s1bn22a1apf" path="res://broken_terminal.tscn" id="7_u5sy4"]
-[ext_resource type="Script" uid="uid://bvv5mjblf7m34" path="res://scenes/powered_door.gd" id="8_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://b7adhmsyud04h" path="res://scenes/test_crate.tscn" id="6_p57ef"]
+[ext_resource type="PackedScene" uid="uid://b8s1bn22a1apf" path="res://scenes/broken_terminal.tscn" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://bvv5mjblf7m34" path="res://scripts/powered_door.gd" id="8_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://tm2kcjw432se" path="res://assets/sprites/Simple_Door.png" id="8_gee14"]
-[ext_resource type="PackedScene" uid="uid://ba8tbqvxlpmrb" path="res://alien_base.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://ba8tbqvxlpmrb" path="res://scenes/aliens/alien_base.tscn" id="10_vtaks"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_e2o6t")
@@ -146,7 +146,7 @@ tile_set = SubResource("TileSet_fc0e3")
 [node name="Player" parent="." unique_id=1420747781 groups=["player"] instance=ExtResource("1_80nbo")]
 position = Vector2(-476, -161)
 rotation = 3.1415927
-collision_mask = 6
+collision_mask = 3
 motion_mode = 1
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=657347797]
@@ -169,6 +169,8 @@ powered_light = NodePath("../PoweredDoor/SimpleDoor/PointLight2D")
 powered_door = NodePath("../PoweredDoor")
 
 [node name="PoweredDoor" type="StaticBody2D" parent="." unique_id=934466657]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("8_0tnpc")
 
 [node name="SimpleDoor" type="Sprite2D" parent="PoweredDoor" unique_id=27958170]
@@ -210,8 +212,7 @@ shape = SubResource("RectangleShape2D_dinhu")
 
 [node name="AlienBase" parent="." unique_id=1346695467 instance=ExtResource("10_vtaks")]
 position = Vector2(250, -1231)
-collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 move_speed = 40.0
 
 [node name="DetectionArea" parent="AlienBase" index="3" unique_id=368015309]
@@ -219,6 +220,10 @@ collision_layer = 0
 
 [node name="AttackArea" parent="AlienBase" index="4" unique_id=1841979329]
 collision_layer = 0
+
+[node name="NavigationAgent2D" parent="AlienBase" index="7" unique_id=1160095615]
+avoidance_layers = 0
+avoidance_mask = 6
 
 [node name="LineOfSight" parent="AlienBase" index="8" unique_id=1739841347]
 target_position = Vector2(0, 174)

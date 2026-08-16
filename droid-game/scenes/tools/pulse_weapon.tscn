@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://pqox5x3x801w"]
+
+[ext_resource type="Script" uid="uid://rh1cqwe6s0wh" path="res://scripts/tools/pulse_weapon.gd" id="1_8yqv2"]
+[ext_resource type="Texture2D" uid="uid://beayoox8g77sh" path="res://assets/sprites/Pulse_Rifle_Sprite_Sheet.png" id="2_2upwx"]
+[ext_resource type="PackedScene" uid="uid://dylun2f6v4d4c" path="res://scenes/tools/player_projectile.tscn" id="2_xfuhw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfuhw"]
+atlas = ExtResource("2_2upwx")
+region = Rect2(42, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb2pc"]
+atlas = ExtResource("2_2upwx")
+region = Rect2(84, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgt70"]
+atlas = ExtResource("2_2upwx")
+region = Rect2(126, 0, 42, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3r7e"]
+atlas = ExtResource("2_2upwx")
+region = Rect2(0, 0, 42, 42)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_56x23"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfuhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb2pc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgt70")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3r7e")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="PulseWeapon" type="Node2D" unique_id=271785491]
+position = Vector2(0, 15)
+script = ExtResource("1_8yqv2")
+projectile_scene = ExtResource("2_xfuhw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1452930060]
+sprite_frames = SubResource("SpriteFrames_56x23")
+animation = &"Idle"
+frame_progress = 0.64446825
+
+[node name="Muzzle" type="Marker2D" parent="." unique_id=317060043]
+position = Vector2(0, 13)
+rotation = 1.5707964
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1025252522]
